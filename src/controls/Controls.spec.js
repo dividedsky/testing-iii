@@ -33,4 +33,14 @@ describe("<Controls />", () => {
     const lockButton = getByText(/lock gate/i);
     expect(lockButton).not.toBeDisabled();
   });
+  it("open button should be disabled if door is locked", () => {
+    const { getByText } = render(<Controls locked={true} />);
+    const closeButton = getByText(/close gate/i);
+    expect(closeButton).toBeDisabled();
+  });
+  it("open button should not be disabled if door is unlocked", () => {
+    const { getByText } = render(<Controls locked={false} />);
+    const closeButton = getByText(/close gate/i);
+    expect(closeButton).not.toBeDisabled();
+  });
 });
